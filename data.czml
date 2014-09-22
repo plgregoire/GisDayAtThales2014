@@ -1,0 +1,30 @@
+
+[
+  {
+    "id":"document",
+    "name":"simple",
+    "version":"1.0"
+  },
+  {
+    "id":"AreaTarget/Pennsylvania",
+    "name":"Pennsylvania",
+    "availability":"2012-03-15T10:00:00Z/2012-03-16T10:00:00Z",
+    "description":"<!--HTML--><div><video id='video1' width='300' autoplay><source src='http://vines.s3.amazonaws.com/videos/2013/05/31/A87BF731-4C60-4AEC-92E3-C483F33F30DF-6275-0000078BF555B8C3_1.1.2.mp4?versionId=FTySNqZejxrS5vuBW_UhGnwCPIch8.ZM'  type='video/mp4' /></video></div>",
+    "point":{
+      "color":{
+        "rgba":[
+          255,0,0,255
+        ]
+      },
+      "outlineWidth":0,
+      "pixelSize":10,
+      "show":true
+    },
+    "position":{
+      "cartesian":[
+        1152255.80150063,-4694317.951340558,4147335.9067563135
+      ]
+    }
+  }
+  
+]
