@@ -1,86 +1,104 @@
-
-[
-  {
-    "id":"document",
-    "name":"simple",
-    "version":"1.0"
-  },
-  {
-    "id":"Pennsylvania",
-    "name":"Pennsylvania2",
-    "availability":"2012-03-15T10:00:00Z/2012-03-16T10:00:00Z",
-    "description":"<!--HTML--><div><video id='video1' width='300' autoplay><source src='http://vines.s3.amazonaws.com/videos/2013/05/31/A87BF731-4C60-4AEC-92E3-C483F33F30DF-6275-0000078BF555B8C3_1.1.2.mp4?versionId=FTySNqZejxrS5vuBW_UhGnwCPIch8.ZM'  type='video/mp4' /></video></div>",
-	"billboard" : {
-            "horizontalOrigin" : "CENTER",
-			"image" : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAH5klEQVR4Xu2aa2wUVRTHz8zs7Exndlu0BeRhEB+AyAdjUqUSBA2iFBCMgfr4oH4RI0SMj0QNJAWUTQTlg4FEE1QWCwpUYlAwPiK+ABcQBLEoBeTR0hZ2Wbbb7s7bc2fbbStbuntnFiTtDSGhzL295zf/8z/n3l0Gevlgenn80AegTwG9nEBfCvRyAfSZYF8K9KVALyfQlwLZCGDZSX2Gj2WmWAxwSMzKZs6VfAY3yOIumxsVo2rRTd49l9pLjwqYX2vMERnm3Qs68P/7yDtF6sHICj3QENb1me+vW7obKivNTCAuCaDigD5F4tmNzQbIV/KN0vxu8rJ4jE7iIJTQzVXrx3jW5Axg5q7zS0TZv4BhWZo9XPk5DAOGpkYMNbmmurToxZwBPPxzU6CgsN+rDOfBuVdTArSFigB0JRHVk8lgdVnxfCoAUhECYF0CQBLucnIkCkAAKi2AR3Y0BSSiAIcATIYFxTDBMk3gOA68mFGMdRlIEADJRFRBAJtoFEAAyIVFjgAYGLyciMFYTzMMFFg43GrBPvYaYLxi/iG0ASAK2FBWknsKzLIVQA/AwrMWoyXhlZI4jB48IJWClg7Vf5+Far0/CGyPVdiZkXZSABWAih0NKROkTAEd+5GhRgyW3CICJ4jpYI5GmmFxHQ+sh0dEeUyFtAKU4Cc0Cqj4uSEgOzBBDcMbZsWhcoQILC+kAfwTbYElpzgArC551UBbFdCSSnAdDYDHEIBURJ8COoY3xGyxAXi8HQBqI3FYeJIFlkMFdKkM7WrAnptjwcvgvx2YJYOLq1gFNPSAdWUDcvcAAkB2CGAwAYAp4BE6AMQSCnx9rBGSBgD+sQdptchBgwwTg67XOTjMF4MH04QWQmcAVfQACh14AAODzFYEIADfyQOycjZdgfcPR+AXpgQEogSK0QFACVICqA/4HFQBkgIDbQAieMUOE8w2lgNnIrCiSQCvhzRiuQ8bgJpqhKrKrqNIgZ8IAHoFGAigv5mwPUCgAPBHYxTeaeCBx+aJZqQBJBLBqnGDrwyAElTAohEFGQD0IGtDhTVH4/C94nOWAkQBjgD4/dQeQBRQggpYNLIrgKSqwXd1MYi3ndCJ96XOm6QrsMDAm5cGFeBPXcAqQX8STSkgiSlArYC6gM8FAJUjJRA7pUBTrAVer9VA4QT76ibTYHHzdhl0MFIAFCcATgV8PucKqBzl6wKg/kILLD6mgUn6gDx2gmkACTTB8UMoPOCHUwHZBQUsurUrgPPxFlhwuBUUrwyslfGmysF775jaDkBrRQATaAH4fNQeYOL7FU0VTVCEYp/UKSgT1h6sgy9bCoDHDrG9HU41fSnZc3gL5bX/gz4N0gCICU64nkYBJwKSTADQlSGyfRXvAeYNsqB0yLVd3qquqbDjRBPUJlKmRw6G5A6PXGYS26tL6PCH6ccW2mEniB5gnwVoAFR8fyIg+2RnADC42zx4JB7dr8uBqKvGO84A6Z9jJ7jqYCPsNAuxDFJmBDkM2QDwLDBxWO4KqPjueECyU4BeAWTrimnB48UalN/UP13wsglp7+mzsOI0gEDZCZKTlqEoUUVJBD+5b3juAGYRABIqgLITaw/StjnTgKcGWnDvsGIs99kB3VcfhuUnTGyFs3v+Iqg2gGRUUZXgBhoAj3xzNCDLzgHY8ZOCh34w3q/DtCEyDC5CU7QvWroZpgYf1pyDr5t5vDnKRi8ZnmkDoCpqcMOkG3NXwMMEgCQ5ToH2rZFMV/EvGQ/Bt4gmDBexSmBwaZ+3jRCv0fAnR+IG/JbkwcJOkNYCUimAnaCiBDdNvpkCwLYjgQKHJpjp3ZGU0DFqtIZuy1yqE6R88+3T7BuhZFRX1WD1AxQAZmz7K1BAUsChCToMg366XQVSADY/MCJ3BUz/siYgXvUAsAyiCW6ZMip3ANO21AQE2T0PoH+VlDNtBaioACX4xVQKAOVbDgUEF02QMgz6acQEEYCGVWDr9FtzV8Dkzw8uFSX5tavZA0zSCaIHfPXQbbkDmLgu9JLk9y3nCmT7c72rbZAGTo2GzyhJZfX2J8YuzLT/Sxaauz7eNVTQkp9J/QeWsuReP5uDGfkOTaq+9TgY+6MxMiG753tc8D8P6K3N0BKNrDRZYfXOJ+/elzMAMoFAYOLnl3Ae/nb8JINA6Ha3mHEWX9hvlNffT7J6CIqklZFogWQkfAQ7gphFOh63BvZSlqnrhm5tjV8bffPQ7Nl4wZZ5OG01Llr1nk/3hnh/Yeml3ir5xokeb4bWSMNGA04+sXfOHM2t2HNdx3UA4zftC3FCQWm3GyHBN8cgGQ2v3tOw85nuvryUayC0z7sOoOzT30KcKGYEQGSvxSKgRcNv75077WXaTbs5z3UAd67fnVkBJPjoOdDisYW/z5v6hptBOFnLdQB3VIUuAkByXos0gaVq8/Y/N3mlkw27Pdd1ALev/TXECp1SAM1dDTeYGPzTh54vD7odgNP1XAcwJrgzxHoJgFSN18L1rfjhx6OH5pZvcbrZfMx3HcDoD3eEQMQqgH2AerYuyvP8rJrnHvw2H5t3Y03XAYz84JcQfhmgVA+fafSy3Mya58t3ubHRfK3hOoDh723fb8Yig7ySf+KRuffX5Gvjbq3rOoAblm3+yOP3v1X77KQ/3dpkPtdxF8CsDdzwcfK44y9M/TGfm3ZzbXcBuLmzy7RWH4DLBPp/+2v+BW92fG4V5BcVAAAAAElFTkSuQmCC",
-            "scale" : 0.5,
-            "show" : [{
-                "interval" : "2012-08-04T16:00:00Z/2012-08-04T18:00:00Z",
-                "boolean" : true
-            }],
-            "verticalOrigin" : "BOTTOM"
-        },
-		"position":{
-			"cartographicDegrees": [-71.324937, 46.802769, 0]
-        }
-  },
-  {
-    "id":"Pennsylvania1",
-    "name":"Pennsylvania",
-    "availability":"2012-03-15T10:00:00Z/2012-03-16T10:00:00Z",
-    "description":"<!--HTML--><div><video id='video1' width='300' autoplay><source src='http://vines.s3.amazonaws.com/videos/2013/05/31/A87BF731-4C60-4AEC-92E3-C483F33F30DF-6275-0000078BF555B8C3_1.1.2.mp4?versionId=FTySNqZejxrS5vuBW_UhGnwCPIch8.ZM'  type='video/mp4' /></video></div>",
-	"billboard" : {
-            "eyeOffset" : {
-                "cartesian" : [0.0, 0.0, 0.0]
-            },
-            "horizontalOrigin" : "CENTER",
-            "image" : "data:image/png;base64,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",
-            "scale" : 0.5,
-            "show" : [{
-                "interval" : "2012-08-04T16:00:00Z/2012-08-04T18:00:00Z",
-                "boolean" : true
-            }],
-            "verticalOrigin" : "BOTTOM"
-        },
-		"position":{
-			"cartographicDegrees": [-71.321161, 46.801917, 0]
-        }
-  },
-  {
-    "id":"ISS1",
-    "polyline":{
-      "width":3,
-      "material":{
-        "polylineGlow":{
-          "color":{
-            "rgba":[
-              0,0,205,255
-            ]
-          }
-        }
-      },
-      "positions":{
-		"cartographicDegrees": [-71.323006, 46.801682, 0, -71.321161, 46.801917, 0]
-      }
-    }
-  },
-  {
-    "id":"ISS2",
-    "polyline":{
-      "width":3,
-      "material":{
-        "polylineGlow":{
-          "color":{
-            "rgba":[
-              0,0,205,255
-            ]
-          }
-        }
-      },
-      "positions":{
-		"cartographicDegrees": [-71.323006, 46.801682, 0, -71.324937, 46.802769, 0]
-      }
-    }
-  }
-  
-]
+[{
+	"id": "document",
+	"name": "simple",
+	"version": "1.0"
+},
+{
+	"id": "Pennsylvania2",
+	"name": "Pennsylvania2",
+	"description": "<!--HTML--><div><video id='video1' width='300' autoplay><source src='http://vines.s3.amazonaws.com/videos/2013/05/31/A87BF731-4C60-4AEC-92E3-C483F33F30DF-6275-0000078BF555B8C3_1.1.2.mp4?versionId=FTySNqZejxrS5vuBW_UhGnwCPIch8.ZM'  type='video/mp4' /></video></div>",
+	"billboard": {
+		"horizontalOrigin": "CENTER",
+		"image": "data:image/png;base64,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",
+		"scale": 0.5,
+		"show": true,
+		"verticalOrigin": "BOTTOM"
+	},
+	"position": {
+		"cartographicDegrees": [-71.324937,
+		46.802769,
+		0]
+	}
+},
+{
+	"id": "Pennsylvania1",
+	"name": "Pennsylvania",
+	"description": "<!--HTML--><div><video id='video1' width='300' autoplay><source src='http://vines.s3.amazonaws.com/videos/2013/05/31/A87BF731-4C60-4AEC-92E3-C483F33F30DF-6275-0000078BF555B8C3_1.1.2.mp4?versionId=FTySNqZejxrS5vuBW_UhGnwCPIch8.ZM'  type='video/mp4' /></video></div>",
+	"billboard": {
+		"eyeOffset": {
+			"cartesian": [0.0,
+			0.0,
+			0.0]
+		},
+		"horizontalOrigin": "CENTER",
+		"image": "data:image/png;base64,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",
+		"scale": 0.5,
+		"show": true,
+		"verticalOrigin": "BOTTOM"
+	},
+	"position": {
+		"cartographicDegrees": [-71.321161,
+		46.801917,
+		0]
+	}
+},
+{
+	"id": "PennsylvaniaDot",
+	"point": {
+		"color": {
+			"rgba": [0,
+			0,
+			0,
+			0]
+		},
+		"outlineWidth": 0,
+		"pixelSize": 1
+	},
+	"position": {
+		"cartographicDegrees": [-71.323006,
+		46.801682,
+		0]
+	}
+	
+},
+{
+	"id": "ISS1",
+	"polyline": {
+		"width": 3,
+		"material": {
+			"polylineGlow": {
+				"color": {
+					"rgba": [0,
+					0,
+					205,
+					255]
+				}
+			}
+		},
+		"positions": {
+			"references": ["PennsylvaniaDot#position",
+			"Pennsylvania1#position"]
+		}
+	}
+	
+},
+{
+	"id": "ISS2",
+	"polyline": {
+		"width": 3,
+		"material": {
+			"polylineGlow": {
+				"color": {
+					"rgba": [0,
+					0,
+					205,
+					255]
+				}
+			}
+		},
+		"positions": {
+			"references": ["PennsylvaniaDot#position",
+			"Pennsylvania2#position"]
+		}
+	}
+}]
