@@ -1,4 +1,4 @@
-#cesiumContainer {
+#mainContainer {
   position: absolute;
   top: 0;
   left: 0;
@@ -8,6 +8,8 @@
   overflow: hidden;
   padding: 0;
   font-family: sans-serif;
+  background:#000 url(stars.jpg);
+  background-size:cover;
 }
 
 html {
@@ -20,3 +22,5 @@ body {
   overflow: hidden;
   height: 100%;
 }
+
+
