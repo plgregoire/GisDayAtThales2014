@@ -14,22 +14,45 @@ function initializeCesium(){
 }
 
 
-var app;
+var map;
 
-    function startWE() {
-      app = new WebGLEarth('mainContainer', {
-        atmosphere: true,
-        position: [47.2, 8.5],
-        altitude: 7000000,
-        panning: true,
-        tilting: true,
-        zooming: true,
-        proxyHost: 'http://srtm.webglearth.com/cgi-bin/corsproxy.fcgi?url='
-      });
+function startWE() {
+	options = {atmosphere: true, zoom:3};
+	map = new WE.map('mainContainer', options);
+	WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+}
+	
+function initializeData(){
+	var geoJSONDataUrl = 'http://api.tiles.mapbox.com/v3/examples.map-zr0njcqy/markers.geojson';
+	$.getJSON(geoJSONDataUrl, function(data){
+		for(var i=0;i<data.features.length;i++){
+			var feature = data.features[i];
+			var marker = WE.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]]).addTo(map);
+			marker.bindPopup(feature.properties.description, {maxWidth: 150, closeButton: true});
+			
+		}
+	});
+	
+}
 
-    }
+ function panTo(coords) {
+	map.panTo([coords.latitude, coords.longitude]);
+ }
+
+function getLocation() {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position){
+			panTo(position.coords); 
+		});
+	} 
+}
+
+	
+
 
 $(function(){
 	startWE();
+	getLocation();
+    initializeData();   
 });
 
