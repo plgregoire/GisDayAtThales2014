@@ -23,6 +23,7 @@ function startWE() {
           subdomains: '1234',
           attribution: 'Tiles Courtesy of MapQuest'
         }).addTo(map);
+	map.on('click', function(){$('#informationPanel').hide();});
 }
 	
 function initializeData(){
@@ -47,7 +48,10 @@ function addFeatureToLayer(features){
 
 function addMarkerToPosition(position){
 	var videoMarker = WE.marker([position.coords.latitude, position.coords.longitude], { title: 'video' }).addTo(map);
-	$(videoMarker.element).on('click', function(){panTo(position.coords);});
+	$(videoMarker.element).on('click', function(){
+		panTo(position.coords);
+		showInformationPanel("<div><video id='video1' width='300'  autoplay='autoplay' loop><source src='http://vines.s3.amazonaws.com/videos/2013/05/31/A87BF731-4C60-4AEC-92E3-C483F33F30DF-6275-0000078BF555B8C3_1.1.2.mp4?versionId=FTySNqZejxrS5vuBW_UhGnwCPIch8.ZM'  type='video/mp4' /></video></div>");
+	});
 }
 
  function panTo(coords) {
@@ -60,6 +64,12 @@ function getLocation() {
 			addMarkerToPosition(position);
 		});
 	} 
+}
+
+function showInformationPanel(content){
+
+	$('#informationPanel').html(content);
+	$('#informationPanel').show();
 }
 
 	
