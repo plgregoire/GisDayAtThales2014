@@ -23,7 +23,7 @@ function startWE() {
           subdomains: '1234',
           attribution: 'Tiles Courtesy of MapQuest'
         }).addTo(map);
-	map.on('click', function(){$('#informationPanel').hide();});
+	map.on('click', function(){hideInformationPanel();});
 }
 	
 function initializeData(){
@@ -39,15 +39,29 @@ function addFeatureToLayer(features){
 		
 		for(var i=0;i<features.length;i++){
 			var feature = features[i];
-			var marker = WE.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], { title: feature.properties.title }).addTo(map);
+			var marker = createClusterMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], { title: feature.properties.title }).addTo(map);
 			marker.bindPopup(feature.properties.description, {maxWidth: 150, closeButton: true});
 			
 		}
 	
 }
 
+function createClusterMarker(position, options){
+	var marker = WE.marker(position, options);
+	$(marker.element.firstChild).removeClass('we-pm-icon');
+	$(marker.element.firstChild).addClass('clusterMarker');
+	$(marker.element.firstChild).html(new Date().getMilliseconds() % 12);
+	
+	return marker;
+}
+
+function createPointerMarker(position, options){
+	var marker = WE.marker(position, options);
+	return marker;
+}
+
 function addMarkerToPosition(position){
-	var videoMarker = WE.marker([position.coords.latitude, position.coords.longitude], { title: 'video' }).addTo(map);
+	var videoMarker = createPointerMarker([position.coords.latitude, position.coords.longitude], { title: 'video' }).addTo(map);
 	$(videoMarker.element).on('click', function(){
 		panTo(position.coords);
 		showInformationPanel("<div><video id='video1' width='300'  autoplay='autoplay' loop><source src='http://vines.s3.amazonaws.com/videos/2013/05/31/A87BF731-4C60-4AEC-92E3-C483F33F30DF-6275-0000078BF555B8C3_1.1.2.mp4?versionId=FTySNqZejxrS5vuBW_UhGnwCPIch8.ZM'  type='video/mp4' /></video></div>");
@@ -70,6 +84,13 @@ function showInformationPanel(content){
 
 	$('#informationPanel').html(content);
 	$('#informationPanel').show();
+}
+
+function hideInformationPanel(content){
+
+	$('#informationPanel').hide();
+	$('#informationPanel').html('');
+	
 }
 
 	
