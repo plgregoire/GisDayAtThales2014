@@ -10,7 +10,7 @@
   <title>Thales GIS day 2014</title>
 
   <link rel="stylesheet" href="app.css"/>
-  <link rel="stylesheet" href="Cesium/Widgets/widgets.css"/>
+  <link href="video-js/video-js.css" rel="stylesheet" type="text/css">
   
 </head>
 <body>
@@ -21,8 +21,12 @@
 </html>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="Cesium/Cesium.js"></script>
 <script src="http://www.webglearth.com/v2/api.js"></script>
 <script src="app.js"></script>
+<script src="video-js/video.js"></script>
+
+  <script>
+    videojs.options.flash.swf = "video-js.swf";
+  </script>
 
 
