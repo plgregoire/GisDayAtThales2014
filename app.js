@@ -17,13 +17,14 @@ function initializeCesium(){
 var map;
 
 function startWE() {
-	options = {atmosphere: true, zoom:3};
+	options = {atmosphere: true, zoom:3, sky:true};
 	map = new WE.map('mainContainer', options);
       WE.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
           subdomains: '1234',
           attribution: 'Tiles Courtesy of MapQuest'
         }).addTo(map);
-	map.on('click', function(){hideInformationPanel();});
+	map.on('click', function(){hideContentPanel();});
+	setInterval('updateInformationPanelContent()', 50);
 }
 	
 function initializeData(){
@@ -37,12 +38,12 @@ function initializeData(){
 
 function addFeatureToLayer(features){	
 		
-		for(var i=0;i<features.length;i++){
-			var feature = features[i];
-			var marker = createClusterMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], { title: feature.properties.title }).addTo(map);
-			marker.bindPopup(feature.properties.description, {maxWidth: 150, closeButton: true});
-			
-		}
+	for(var i=0;i<features.length;i++){
+		var feature = features[i];
+		var marker = createClusterMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], { title: feature.properties.title }).addTo(map);
+		marker.bindPopup(feature.properties.description, {maxWidth: 150, closeButton: true});
+		
+	}
 	
 }
 
@@ -64,7 +65,7 @@ function addMarkerToPosition(position){
 	var videoMarker = createPointerMarker([position.coords.latitude, position.coords.longitude], { title: 'video' }).addTo(map);
 	$(videoMarker.element).on('click', function(){
 		panTo(position.coords);
-		showInformationPanel("<div><video id='video1' width='300'  autoplay='autoplay' loop><source src='http://vines.s3.amazonaws.com/videos/2013/05/31/A87BF731-4C60-4AEC-92E3-C483F33F30DF-6275-0000078BF555B8C3_1.1.2.mp4?versionId=FTySNqZejxrS5vuBW_UhGnwCPIch8.ZM'  type='video/mp4' /></video></div>");
+		showContentPanel("<div><video id='video1' width='300'  autoplay='autoplay' loop><source src='http://vines.s3.amazonaws.com/videos/2013/05/31/A87BF731-4C60-4AEC-92E3-C483F33F30DF-6275-0000078BF555B8C3_1.1.2.mp4?versionId=FTySNqZejxrS5vuBW_UhGnwCPIch8.ZM'  type='video/mp4' /></video></div>");
 	});
 }
 
@@ -80,17 +81,22 @@ function getLocation() {
 	} 
 }
 
-function showInformationPanel(content){
+function showContentPanel(content){
 
-	$('#informationPanel').html(content);
-	$('#informationPanel').show();
+	$('#contentPanel').html(content);
+	$('#contentPanel').show();
 }
 
-function hideInformationPanel(content){
+function hideContentPanel(content){
 
-	$('#informationPanel').hide();
-	$('#informationPanel').html('');
+	$('#contentPanel').hide();
+	$('#contentPanel').html('');
+	updateInformationPanelContent();
 	
+}
+
+function updateInformationPanelContent(){
+	$('#informationPanel').html("altitude:" + map.getAltitude() + ", position:" + map.getPosition() +", zoom:" + map.getZoom());
 }
 
 	
