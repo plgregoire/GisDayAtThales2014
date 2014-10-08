@@ -15,7 +15,7 @@ function initializeCesium(){
 
 
 var map;
-
+var animate = true;
 function startWE() {
 	options = {atmosphere: true, zoom:3, sky:true};
 	map = new WE.map('mainContainer', options);
@@ -23,8 +23,15 @@ function startWE() {
           subdomains: '1234',
           attribution: 'Tiles Courtesy of MapQuest'
         }).addTo(map);
-	map.on('click', function(){hideContentPanel();});
+	map.on('click', function(){animate = false; hideContentPanel();});
 	setInterval('updateInformationPanelContent()', 50);
+	// Start a simple rotation animation
+    setInterval(function() {
+		if(animate){
+          var c = map.getPosition();
+          map.setCenter([c[0], c[1] + 0.1]);
+		}
+        }, 90);
 }
 	
 function initializeData(){
@@ -65,7 +72,7 @@ function addMarkerToPosition(position){
 	var videoMarker = createPointerMarker([position.coords.latitude, position.coords.longitude], { title: 'video' }).addTo(map);
 	$(videoMarker.element).on('click', function(){
 		panTo(position.coords);
-		showContentPanel('<div id="post" class="video-js vjs-default-skin vjs-playing" style="width: 610px; height: 610px;">' +
+		showContentPanel('<div id="post" class="video-js vjs-default-skin vjs-playing" style="width: 200px; height: 200px;">' +
 		'<video id="post_html5_api" class="vjs-tech" loop="" autoplay="autoplay" preload="auto" poster="https://v.cdn.vine.co/r/thumbs/0C7A8C71A61127111675787513856_2.5.1.12204246823284265530.mp4.jpg"' +
 		' src="https://mtc.cdn.vine.co/r/videos/46433DED801127111674810327040_29787492a48.5.1.12204246823284265530.mp4">' +
 		'<source src="https://mtc.cdn.vine.co/r/videos/46433DED801127111674810327040_29787492a48.5.1.12204246823284265530.mp4" type="video/mp4">' +
@@ -98,11 +105,13 @@ function hideContentPanel(content){
 
 	$('#contentPanel').hide();
 	$('#contentPanel').html('');
-	updateInformationPanelContent();
+
 	
 }
 
+
 function updateInformationPanelContent(){
+
 	$('#informationPanel').html("altitude:" + map.getAltitude() + ", position:" + map.getPosition() +", zoom:" + map.getZoom());
 }
 
