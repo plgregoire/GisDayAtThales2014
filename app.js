@@ -1,19 +1,6 @@
 
 
 
-
-function initializeCesium(){
-	Cesium.InfoBoxViewModel.defaultSanitizer = function(rawHtml){ return rawHtml;};
-	var viewer = new Cesium.Viewer('mainContainer');
-		
-	var dataSource = new Cesium.CzmlDataSource();
-	dataSource.loadUrl('data.czml');
-	viewer.dataSources.add(dataSource);
-		
-	viewer.extend(Cesium.viewerEntityMixin);
-}
-
-
 var map;
 var animate = true;
 function startWE() {
@@ -23,7 +10,8 @@ function startWE() {
           subdomains: '1234',
           attribution: 'Tiles Courtesy of MapQuest'
         }).addTo(map);
-	map.on('click', function(){animate = false; hideContentPanel();});
+	//$('#mainContainer').on('click', function(){animate = false; hideContentPanel();});	
+	$('#mainContainer').on('vclick', function(){animate = false; hideContentPanel();});
 	setInterval('updateInformationPanelContent()', 50);
 	// Start a simple rotation animation
     setInterval(function() {
