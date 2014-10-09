@@ -112,7 +112,8 @@ function hideContentPanel(content){
 
 function updateInformationPanelContent(){
 
-	$('#informationPanel').html("altitude:" + map.getAltitude() + ", position:" + map.getPosition() +", zoom:" + map.getZoom());
+	//$('#informationPanel').html("altitude:" + map.getAltitude() + ", position:" + map.getPosition() +", zoom:" + map.getZoom());
+	$('#informationPanel').html("bounds: " + map.getBounds());
 }
 
 	
