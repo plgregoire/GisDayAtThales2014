@@ -23,30 +23,53 @@ function startWE() {
 }
 	
 function initializeData(){
-	var geoJSONDataUrl = 'http://api.tiles.mapbox.com/v3/examples.map-zr0njcqy/markers.geojson';
+	var geoJSONDataUrl = 'sma.json';
 	$.getJSON(geoJSONDataUrl, function(data){
-		addFeatureToLayer(data.features);
+		var featuresByLocation = getFeaturesByLocation(data.documents);
+		addFeaturesToLayer(featuresByLocation);
 	});
 	
 
 }
 
-function addFeatureToLayer(features){	
-		
+function  getFeaturesByLocation(features){
+
+	var featuresByLocation = {};
 	for(var i=0;i<features.length;i++){
 		var feature = features[i];
-		var marker = createClusterMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], { title: feature.properties.title }).addTo(map);
-		marker.bindPopup(feature.properties.description, {maxWidth: 150, closeButton: true});
+		if(feature.location){
+			if(!featuresByLocation[feature.location]){
+				featuresByLocation[feature.location] = [];
+			}
+			featuresByLocation[feature.location].push(feature);
+		} 
+	}
+	
+	return featuresByLocation;
+
+}
+
+function addFeaturesToLayer(featuresByLocation){	
 		
+	for(var location in featuresByLocation){
+		var features = featuresByLocation[location];
+		var coordinates = location.split(',');
+		
+		if(features.length > 1){
+			createClusterMarker(coordinates, { }, features.length).addTo(map);
+		}else{
+			createPointerMarker(coordinates, { }).addTo(map);
+		}
 	}
 	
 }
 
-function createClusterMarker(position, options){
+
+function createClusterMarker(position, options, content){
 	var marker = WE.marker(position, options);
 	$(marker.element.firstChild).removeClass('we-pm-icon');
 	$(marker.element.firstChild).addClass('clusterMarker');
-	$(marker.element.firstChild).html(new Date().getMilliseconds() % 12);
+	$(marker.element.firstChild).html(content);
 	
 	return marker;
 }
@@ -80,7 +103,7 @@ function addMarkerToPosition(position){
 function getLocation() {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position){
-			addMarkerToPosition(position);
+			panTo(position);
 		});
 	} 
 }
@@ -103,7 +126,7 @@ function hideContentPanel(content){
 function updateInformationPanelContent(){
 
 	//$('#informationPanel').html("altitude:" + map.getAltitude() + ", position:" + map.getPosition() +", zoom:" + map.getZoom());
-	$('#informationPanel').html("bounds: " + map.getBounds());
+	//$('#informationPanel').html("bounds: " + map.getBounds());
 }
 
 	
