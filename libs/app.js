@@ -3,6 +3,18 @@
 
 var map;
 var animate = true;
+
+var featureClassesBySentiment = {
+			"negative": 0,
+			"neutral": 0,
+			"positive": 0
+		};
+var clusterClassesBySentiment = {
+			"negative": 0,
+			"neutral": 0,
+			"positive": 0
+		};
+
 function startWE() {
 	options = {atmosphere: true, zoom:3, sky:true};
 	map = new WE.map('mainContainer', options);
@@ -56,7 +68,7 @@ function addFeaturesToLayer(featuresByLocation){
 		var coordinates = location.split(',');
 		
 		if(features.length > 1){
-			createClusterMarker(coordinates, { }, features.length).addTo(map);
+			createClusterMarker(coordinates, { }, features).addTo(map);
 		}else{
 			createPointerMarker(coordinates, { }).addTo(map);
 		}
@@ -65,13 +77,40 @@ function addFeaturesToLayer(featuresByLocation){
 }
 
 
-function createClusterMarker(position, options, content){
+function createClusterMarker(position, options, features){
 	var marker = WE.marker(position, options);
 	$(marker.element.firstChild).removeClass('we-pm-icon');
-	$(marker.element.firstChild).addClass('clusterMarker');
-	$(marker.element.firstChild).html(content);
+	$(marker.element.firstChild).addClass('marker-cluster');
+	
+	var sentimentValue = getFeaturesSentimentValue(features);
+	
+	$(marker.element.firstChild).addClass(getColorClassFromSentimentValue(sentimentValue));
+	$(marker.element.firstChild).html('<div>' + features.length + '</div>');
 	
 	return marker;
+}
+
+function getFeaturesSentimentValue(features){
+	var result = 0;
+	for(var i=0;i<features.length;i++){
+		result += getFeatureSentimentValue(features[i]);
+	}
+	return result;
+}
+
+function getFeatureSentimentValue(feature){
+	return (feature.sentiment.negative * -1) + feature.sentiment.positive;
+}
+
+function getColorClassFromSentimentValue(sentimentValue){
+	var result = 'grey';
+	if (sentimentValue > 0){
+		result = 'green';
+	}else if(sentimentValue < 0){
+		result = 'red';
+	}
+	
+	return result;
 }
 
 function createPointerMarker(position, options){
@@ -97,7 +136,7 @@ function addMarkerToPosition(position){
 }
 
  function panTo(coords) {
-	map.panTo([coords.latitude, coords.longitude]);
+	//map.panTo([coords.latitude, coords.longitude]);
  }
 
 function getLocation() {

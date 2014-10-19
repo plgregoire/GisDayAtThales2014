@@ -32,6 +32,54 @@
   z-index: 65;
 }
 
+.marker-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+	position: absolute;
+	z-index: 64;
+	width: 40px !important;
+	height: 40px !important;
+	margin-left: -20px !important;
+	margin-top: -40px !important;
+
+}
+
+.marker-cluster div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+	text-align: center;
+	color:white;
+	line-height: 30px;
+	border-radius: 15px;
+}
+
+.red   {
+	background-color: rgba(226, 100, 100, 0.6);
+}
+
+.red div {
+background-color: rgba(226, 44, 44, 0.6);
+}
+
+.green {
+	background-color: rgba(181, 226, 140, 0.6);
+}
+
+.green div  {
+	background-color: rgba(110, 204, 57, 0.6);
+}
+
+.grey   {
+	background-color: rgba(222, 222, 222, 0.6);
+}
+
+.grey div {
+background-color: rgba(111, 111, 111, 0.6);
+}
+
+
 
 
 .clusterMarker{
