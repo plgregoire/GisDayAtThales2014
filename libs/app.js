@@ -4,17 +4,6 @@
 var map;
 var animate = true;
 
-var featureClassesBySentiment = {
-			"negative": 0,
-			"neutral": 0,
-			"positive": 0
-		};
-var clusterClassesBySentiment = {
-			"negative": 0,
-			"neutral": 0,
-			"positive": 0
-		};
-
 function startWE() {
 	options = {atmosphere: true, zoom:3, sky:true};
 	map = new WE.map('mainContainer', options);
@@ -69,13 +58,19 @@ function addFeaturesToLayer(featuresByLocation){
 		
 		if(features.length > 1){
 			createClusterMarker(coordinates, { }, features).addTo(map);
-		}else{
-			createPointerMarker(coordinates, { }).addTo(map);
+		}else if(features.length > 0){
+			createPointerMarker(coordinates, { }, features[0]).addTo(map);
 		}
 	}
 	
 }
-
+function createPointerMarker(position, options, feature){
+	var marker = WE.marker(position, options);
+	var sentimentValue = getFeatureSentimentValue(feature);
+	$(marker.element.firstChild).addClass(getFeatureMarkerColorClassFromSentimentValue(sentimentValue));
+		
+	return marker;
+}
 
 function createClusterMarker(position, options, features){
 	var marker = WE.marker(position, options);
@@ -84,7 +79,7 @@ function createClusterMarker(position, options, features){
 	
 	var sentimentValue = getFeaturesSentimentValue(features);
 	
-	$(marker.element.firstChild).addClass(getColorClassFromSentimentValue(sentimentValue));
+	$(marker.element.firstChild).addClass(getClusterMarkerColorClassFromSentimentValue(sentimentValue));
 	$(marker.element.firstChild).html('<div>' + features.length + '</div>');
 	
 	return marker;
@@ -102,21 +97,29 @@ function getFeatureSentimentValue(feature){
 	return (feature.sentiment.negative * -1) + feature.sentiment.positive;
 }
 
-function getColorClassFromSentimentValue(sentimentValue){
-	var result = 'grey';
+function getClusterMarkerColorClassFromSentimentValue(sentimentValue){
+	var result = 'marker-cluster-grey';
 	if (sentimentValue > 0){
-		result = 'green';
+		result = 'marker-cluster-green';
 	}else if(sentimentValue < 0){
-		result = 'red';
+		result = 'marker-cluster-red';
 	}
 	
 	return result;
 }
 
-function createPointerMarker(position, options){
-	var marker = WE.marker(position, options);
-	return marker;
+function getFeatureMarkerColorClassFromSentimentValue(sentimentValue){
+	var result = 'marker-feature-grey';
+	if (sentimentValue > 0){
+		result = 'marker-feature-green';
+	}else if(sentimentValue < 0){
+		result = 'marker-feature-red';
+	}
+	
+	return result;
 }
+
+
 
 function addMarkerToPosition(position){
 	var videoMarker = createPointerMarker([position.coords.latitude, position.coords.longitude], { title: 'video' }).addTo(map);
