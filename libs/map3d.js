@@ -13,7 +13,7 @@ function Map3D() {
 			  attribution: 'Tiles Courtesy of MapQuest'
 			}).addTo(this.map);
 	
-		$('#mainContainer').on('vclick', function(){self.animate = false; self.hideContentPanel(); });
+		$('#mainContainer').on('vclick', function(){self.animate = false; });
 		// Start a simple rotation animation
 		setInterval(function() {
 			if(this.animate){
@@ -70,8 +70,10 @@ function Map3D() {
 	}
 	Map3D.prototype.createPointerMarker= function(position, options, feature){
 		var marker = WE.marker(position, options);
-		var sentimentValue = this.getFeatureSentimentValue(feature);
-		$(marker.element.firstChild).addClass(this.getFeatureMarkerColorClassFromSentimentValue(sentimentValue));
+		$(marker.element.firstChild).removeClass('we-pm-icon');
+		
+		var vectorMarker = new VectorMarker({markerColor : this.getColorFromSentimentValue(this.getFeatureSentimentValue(feature))});
+		$(marker.element.firstChild).html(vectorMarker.createIcon());
 			
 		return marker;
 	}
@@ -83,46 +85,47 @@ function Map3D() {
 		
 		var sentimentValue = this.getFeaturesSentimentValue(features);
 		
-		$(marker.element.firstChild).addClass(this.getClusterMarkerColorClassFromSentimentValue(sentimentValue));
-		$(marker.element.firstChild).html('<div>' + features.length + '</div>');
+		var color = this.getColorFromSentimentValue(sentimentValue)
+		
+		$(marker.element.firstChild).html('<div style="background-color:'+ color +';"><span>' + features.length + '</span></div>');
 		
 		return marker;
 	}
 
 	Map3D.prototype.getFeaturesSentimentValue= function(features){
-		var result = 0;
+		var total = 0;
 		for(var i=0;i<features.length;i++){
-			result += this.getFeatureSentimentValue(features[i]);
+			var result = this.getFeatureSentimentValue(features[i])
+			if(result){
+				total += result;
+			}
 		}
-		return result;
+		return total;
 	}
 
 	Map3D.prototype.getFeatureSentimentValue= function(feature){
-		return (feature.sentiment.negative * -1) + feature.sentiment.positive;
+		if(feature.isSentimentAvailable)
+			return (feature.sentiment.negative * -1) + feature.sentiment.positive;
+		else
+			return null;
+			
 	}
 
-	Map3D.prototype.getClusterMarkerColorClassFromSentimentValue= function(sentimentValue){
-		var result = 'marker-cluster-grey';
-		if (sentimentValue > 0){
-			result = 'marker-cluster-green';
-		}else if(sentimentValue < 0){
-			result = 'marker-cluster-red';
+	Map3D.prototype.getColorFromSentimentValue= function(sentimentValue){
+		var result = 'grey';
+		if(sentimentValue != null){
+			if (sentimentValue > 0){
+				result = 'green';
+			}else if(sentimentValue < 0){
+				result = 'red';
+			}else{
+				result = 'blue';
+			}
+			
 		}
 		
 		return result;
 	}
-
-	Map3D.prototype.getFeatureMarkerColorClassFromSentimentValue = function(sentimentValue){
-		var result = 'marker-feature-grey';
-		if (sentimentValue > 0){
-			result = 'marker-feature-green';
-		}else if(sentimentValue < 0){
-			result = 'marker-feature-red';
-		}
-		
-		return result;
-	}
-
 
 
 	Map3D.prototype.addMarkerToPosition= function(position){
@@ -155,26 +158,7 @@ function Map3D() {
 		} 
 	}
 
-	Map3D.prototype.showContentPanel= function(content){
-
-		$('#contentPanel').html(content);
-		$('#contentPanel').show();
-	}
-
-	Map3D.prototype.hideContentPanel= function(content){
-
-		$('#contentPanel').hide();
-		$('#contentPanel').html('');
-
-		
-	}
-
 
 }
 
-
-$(function(){
-	var map3D = new Map3D();
-	map3D.startWE();  
-});
 

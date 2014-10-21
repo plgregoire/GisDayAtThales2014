@@ -9,26 +9,35 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <title>Thales GIS day 2014</title>
 
-  <link rel="stylesheet" href="style/app.css"/>
+  <link rel="stylesheet" href="style/map3d.css"/>
+  <link rel="stylesheet" href="style/vector-markers.css"/>
   <link href="video-js/video-js.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="style/jquery.mobile-1.4.4.min.css" />
   
 </head>
 <body>
   <div id="mainContainer"></div>
-  <div id="contentPanel"></div>
-  <span id="informationPanel"></span>
 </body>
-</html>
+</html>	
 
 <script src="libs/jquery-2.1.1.min.js"></script>
 <script src="libs/webgleartmapi.js"></script>
+
+<script src="libs/vectorMarker.js"></script>
 <script src="libs/map3d.js"></script>
 <script src="video-js/video.js"></script>
 <script src="libs/jquery.mobile-1.4.4.min.js"></script>
 
-  <script>
+
+	 <script>
+		$(function(){
+
+		var map3D = new Map3D();
+		map3D.startWE();  
+		
+	});
     videojs.options.flash.swf = "video-js.swf";
+	
   </script>
 
 
