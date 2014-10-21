@@ -9,13 +9,13 @@ function Map3D() {
 Map3D.prototype.startWE = function() {
 	options = {atmosphere: true, zoom:3, sky:true};
 	var self = this;
-	this.map = new WE.map('mainContainer', options);
+	this.map = new WE.map('map3d', options);
 	  WE.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg', {
 		  subdomains: '1234',
 		  attribution: 'Tiles Courtesy of MapQuest'
 		}).addTo(this.map);
 
-	$('#mainContainer').on('vclick', function(){self.animate = false; });
+	$('#map3d').on('vclick', function(){self.animate = false; });
 	// Start a simple rotation animation
 	setInterval(function() {
 		if(this.animate){
